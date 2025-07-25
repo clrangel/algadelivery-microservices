@@ -52,6 +52,21 @@ public class Delivery {
         return delivery;
     }
 
+    //Adiciona item
+    public UUID addItem(String name, int quantity) {
+        Item item = Item.brandNew(name, quantity, this);
+        items.add(item);
+        calculateTotalItems();
+        return item.getId();
+    }
+
+    //Calcula todos os itens
+    private void calculateTotalItems() {
+        int totalItems = getItems().stream().mapToInt(Item::getQuantity).sum();
+        setTotalItems(totalItems);
+    }
+
+
     public List<Item> getItems() {
         return Collections.unmodifiableList(this.items);
     }
