@@ -47,4 +47,27 @@ public class Courier {
         return courier;
     }
 
+    //Atribui uma entrega a um entregador
+    //Adiciona a entrega à lista de pendentes e atualiza a contagem total.
+    public void assign(UUID deliveryId) {
+        this.pendingDeliveries.add(
+                AssignedDelivery.pending(deliveryId, this)
+        );
+        this.pendingDeliveriesQuantity++;
+    }
+
+    //Marca uma entrega como concluída
+    //Remove da lista de pendentes, atualiza as contagens e registra a data da última entrega concluída
+    public void fulfill(UUID deliveryId) {
+        AssignedDelivery delivery = this.pendingDeliveries.stream().filter(
+                d -> d.getId().equals(deliveryId)
+        ).findFirst().orElseThrow();
+
+        this.pendingDeliveries.remove(delivery);
+
+        this.pendingDeliveriesQuantity--;
+        this.fulfilledDeliveriesQuantity++;
+        this.lastFulfilledDeliveryAt = OffsetDateTime.now();
+    }
+
 }
