@@ -78,6 +78,16 @@ public class Delivery {
         calculateTotalItems();
     }
 
+    // Altera apenas a quantidade de um item existente na lista de itens da entrega.
+    // Recalcula o total de itens após a alteração.
+    public void changeItemQuantity(UUID itemId, int quantity) {
+        Item item = getItems().stream().filter(i -> i.getId().equals(itemId))
+                .findFirst().orElseThrow();
+
+        item.setQuantity(quantity);
+        calculateTotalItems();
+    }
+
 
     public List<Item> getItems() {
         return Collections.unmodifiableList(this.items);

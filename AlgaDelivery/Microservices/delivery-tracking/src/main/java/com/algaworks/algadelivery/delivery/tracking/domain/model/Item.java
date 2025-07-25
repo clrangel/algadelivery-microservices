@@ -15,6 +15,8 @@ public class Item {
     @EqualsAndHashCode.Include
     private UUID id;
     private String name;
+
+    @Setter(AccessLevel.PACKAGE) //Protege o domínio contra mudanças indevidas
     private Integer quantity;
 
     private Delivery delivery;
