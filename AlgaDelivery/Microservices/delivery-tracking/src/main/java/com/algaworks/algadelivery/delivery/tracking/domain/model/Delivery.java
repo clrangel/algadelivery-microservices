@@ -72,6 +72,12 @@ public class Delivery {
         calculateTotalItems();
     }
 
+    //Remove todos os itens
+    public void removeItems() {
+        items.clear();
+        calculateTotalItems();
+    }
+
 
     public List<Item> getItems() {
         return Collections.unmodifiableList(this.items);
