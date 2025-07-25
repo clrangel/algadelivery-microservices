@@ -66,6 +66,12 @@ public class Delivery {
         setTotalItems(totalItems);
     }
 
+    //Remove um item
+    public void removeItem(UUID itemId) {
+        items.removeIf(item -> item.getId().equals(itemId));
+        calculateTotalItems();
+    }
+
 
     public List<Item> getItems() {
         return Collections.unmodifiableList(this.items);
